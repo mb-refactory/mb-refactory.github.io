@@ -45,7 +45,7 @@ function initializeEpisodeDetails(){
   const publishDateElement = document.querySelector('.publish-date');
   const player = document.querySelector('audio');
 
-  cover.src = episodeDetails.feedImage;
+  cover.src = episodeDetails.image;
   title.textContent = episodeDetails.title;
   description.textContent = episodeDetails.description.replace(/<[^>]*>/g, '');
   let episodeDate = episodeDetails.datePublishedPretty.split(' ').slice(0, 3).join(' ');
