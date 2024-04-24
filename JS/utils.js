@@ -1,20 +1,17 @@
-function updateGrid(data, pageType) {
+function updateGrid(data) {
   const grid = document.querySelector(".container-grid");
   const row = document.createElement("div");
 
   row.classList.add("row", "justify-content-center");
 
   data.forEach((podcast) => {
-    const podcastInfo = pageType === "suggested" ? podcast : podcast.feed;
+    const podcastInfo = data.every(podcastItem => podcastItem.feed) ? podcast.feed : podcast;
 
     const col = document.createElement("div");
     col.classList.add("col-lg-6", "col-md-12", "fade-in");
 
     const link = document.createElement("a");
-    link.href =
-      pageType === "suggested"
-        ? "podcast-details-suggested.html"
-        : "podcast-details-subscribed.html";
+    link.href = "podcast-details.html";
     link.addEventListener("click", function () {
       sessionStorage.setItem("selectedPodcast", JSON.stringify(podcastInfo));
     });
@@ -33,10 +30,10 @@ function updateGrid(data, pageType) {
     const img = document.createElement("img");
     img.src = podcastInfo.artwork;
     img.classList.add("img-fluid", "rounded-start");
-    img.alt = "...";
+    img.alt = "cover";
 
     const cardBodyCol = document.createElement("div");
-    cardBodyCol.classList.add("col-8");
+    cardBodyCol.classList.add("col-8", "bg-light");
 
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
@@ -75,7 +72,6 @@ function updateGrid(data, pageType) {
 function initializePodcastDetails() {
   document.addEventListener("DOMContentLoaded", function () {
     const podcastDetails = getPodcastDetailsFromSessionStorage();
-    console.log("Cover URL:" + podcastDetails.artwork);
     const cover = document.querySelector(".img-fluid");
     cover.src = podcastDetails.artwork;
     const title = document.querySelector("h1");
@@ -89,8 +85,8 @@ function initializePodcastDetails() {
 }
 
 function getLanguage() {
-  return navigator.language;
-  // return 'it-IT';
+  // return navigator.language;
+  return 'it-IT';
 }
 
 async function getTranslation(language, key) {
@@ -138,11 +134,11 @@ function getSubscriptionDateById(podcastId) {
   return subscribedPodcast ? subscribedPodcast.subscriptionDate : null;
 }
 
-function formatDate(date){
+function formatDate(date) {
   let dateObject = new Date(date);
   const options = { month: 'long', day: 'numeric', year: 'numeric' };
   const formattedDate = dateObject.toLocaleDateString(getLanguage(), options);
-  return formattedDate
+  return formattedDate;
 }
 
 function getPodcastDetailsFromSessionStorage() {

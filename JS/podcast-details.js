@@ -4,23 +4,20 @@ initializePodcastDetails();
 const subscriptionDateElement = document.querySelector(".subscription-date");
 const subscribedOnElement = document.querySelector(".subscribed-on");
 const unsubscribeBtn = document.querySelector(".unsubscribe-btn");
+const subscribeBtn = document.querySelector('.subscribe-btn');
+translate(unsubscribeBtn, 'unsubscribe');
+translate(subscribeBtn, 'subscribe');
 
-const subscribedPodcastsIDs = getSubscribedPodcastsIDs();
 const podcastID = getPodcastDetailsFromSessionStorage().id;
-const subscriptionDate = getSubscriptionDateById(podcastID);
-subscriptionDateElement.textContent = formatDate(subscriptionDate);
-translate(subscribedOnElement, 'subscribedOn');
-translate(unsubscribeBtn, 'unsubscribe')
 
-console.log('Gathering information on podcast episodes with ID: ' + podcastID);
 podcastIndexEpisodesByIdAPI(podcastID, 20)
     .then(data => {
         showEpisodes(data);
+        toggleSubscriptionElements();
     });
 
 function showEpisodes(data) {
     const details = document.querySelector('.details');
-    const subscribtionDateElement = document.querySelector('.subscription-date');
     // Ordina cronologicamente
     data.items.sort((a, b) => a.datePublished - b.datePublished);
     data.items.forEach(episode => {
@@ -33,7 +30,7 @@ function showEpisodes(data) {
 
         const episodeTitleElement = document.createElement('h3');
         let episodeTitle = episode.title;
-        episodeTitleElement.className = 'card-title mt-2 mx-5 text-center';
+        episodeTitleElement.className = 'card-title mt-3 mx-5 text-center fw-bold';
         episodeTitleElement.textContent = episodeTitle;
         card.appendChild(episodeTitleElement);
 
@@ -42,7 +39,7 @@ function showEpisodes(data) {
         viewDescriptionBtn.setAttribute('type', 'button');
         translate(viewDescriptionBtn, 'readDescription');
         viewDescriptionBtn.style = 'width: 90%';
-        
+
         let closeBtn = document.querySelector('.close');
         translate(closeBtn, 'close');
 
@@ -60,17 +57,35 @@ function showEpisodes(data) {
 
         const viewEpisodeBtn = document.createElement('button');
         viewEpisodeBtn.type = 'button';
-        viewEpisodeBtn.className = 'btn btn-primary py-3 mx-3 mb-2 btn-lg';
+        viewEpisodeBtn.className = 'btn btn-primary py-3 mx-3 mb-2 btn-lg fw-bold';
         viewEpisodeBtn.style = 'width: 90%';
         translate(viewEpisodeBtn, 'viewEpDetails');
         link.appendChild(viewEpisodeBtn);
         cardBody.appendChild(link);
-
         card.appendChild(cardBody);
-        subscribtionDateElement.insertAdjacentElement('afterend', card);
+        // details.appendChild(card);
+        subscribeBtn.insertAdjacentElement('afterend', card);
 
     });
 
+}
+
+function showSubscriptionDate() {
+    const subscriptionInfoElement = document.querySelector(".subscription-info");
+    subscriptionInfoElement.classList.remove('d-none');
+    const subscriptionDate = getSubscriptionDateById(podcastID);
+    subscriptionDateElement.textContent = formatDate(subscriptionDate);
+    translate(subscribedOnElement, 'subscribedOn');
+}
+
+function addPodcastToSubscriptionList(podcastId) {
+    let subscribedPodcasts = getSubscribedPodcasts();
+    if (!isSubscribed(podcastID)) {
+        const currentDate = new Date();
+        subscribedPodcasts.push({ id: podcastId, subscriptionDate: currentDate });
+        localStorage.setItem('subscribedPodcasts', JSON.stringify(subscribedPodcasts));
+        console.log('Podcast with ID: ' + podcastId + ' added to the subscribed list');
+    }
 }
 
 function removeSubscribedPodcast(podcastId) {
@@ -80,11 +95,40 @@ function removeSubscribedPodcast(podcastId) {
     localStorage.setItem('subscribedPodcasts', JSON.stringify(subscribedPodcasts));
 }
 
+function isSubscribed(toPodcastWithID) {
+    const subscribedPodcastsIDs = getSubscribedPodcastsIDs();
+    return subscribedPodcastsIDs.includes(toPodcastWithID);
+}
+
+function toggleSubscriptionElements() {
+    translate(subscribeBtn, 'subscribe');
+    if (isSubscribed(podcastID)) {
+        showSubscriptionDate();
+        subscribeBtn.classList.add('d-none');
+        unsubscribeBtn.classList.remove('d-none');
+        document.body.classList.replace('bg-body-secondary', 'bg-dark-subtle');
+        document.querySelector('.bi-star-fill').classList.remove('d-none');
+    }
+    if (!isSubscribed(podcastID)) {
+        unsubscribeBtn.classList.add('d-none');
+    }
+}
+
+subscribeBtn.addEventListener('click', () => {
+    if (!isSubscribed(podcastID)) {
+        addPodcastToSubscriptionList(podcastID);
+        translate(subscribeBtn, 'subscribedMsg');
+        setTimeout(() => {
+            toggleSubscriptionElements();
+        }, 2000);
+    }
+});
+
 unsubscribeBtn.addEventListener('click', () => {
-    if (subscribedPodcastsIDs.includes(podcastID)) {
+    if (isSubscribed(podcastID)) {
         removeSubscribedPodcast(podcastID);
         alert('You successfully unsubscribed from this podcast');
-        location.href = ('your-podcasts.html');
+        window.history.go(-1);
     }
 }
 );

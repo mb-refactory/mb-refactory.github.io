@@ -2,7 +2,7 @@
 
 audio {
     width: 90%;
-    /* border-radius: 1em; */
+    border-radius: 2em;
     background-color: grey;
 }
 
@@ -41,6 +41,7 @@ body {
     animation: shadowPulse 1s linear infinite;
     transform: scale(2); /* Aumenta le dimensioni del loader senza modificare le proporzioni */
   }
+
   
   @keyframes shadowPulse {
     33% {
@@ -56,4 +57,8 @@ body {
       box-shadow: -24px 0 #FFF, 24px 0 #ffb700
     }
   }
-      
+
+
+  
+
+  

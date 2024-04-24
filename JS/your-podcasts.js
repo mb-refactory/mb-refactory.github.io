@@ -7,6 +7,5 @@ if (subscribedIDs.length === 0){
 
 showLoadingSpinner()
 fetchSubscribedPodcastsByIds(subscribedIDs).then((subscribedPodcasts) => {
-  updateGrid(subscribedPodcasts, "your-podcasts");
-  console.log(subscribedPodcasts);
+  updateGrid(subscribedPodcasts);
 });

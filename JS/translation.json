@@ -5,7 +5,7 @@
         "search": "Search",
         "subscribedOn": "Subscribed on: ",
         "readDescription": "Read description...",
-        "viewEpDetails": "View episode details",
+        "viewEpDetails": "Listen",
         "close": "close",
         "unsubscribe": "Unsubscribe from this podcast",
         "play": "PLAY",
@@ -14,7 +14,6 @@
         "suggestionsForYou": "Here are some suggestions for you:",
         "subscribe": "Subscribe to this podcast",
         "subscribedMsg": "You subscribed to this podcast!",
-        "subscribedAlready": "Already subscribed: view episodes",
         "searchPlaceHolder": "Search",
         "results": "Results of your search:"
     },
@@ -24,7 +23,7 @@
         "search": "Cerca",
         "subscribedOn": "Data di iscrizione: ",
         "readDescription": "Leggi la descrizione...",
-        "viewEpDetails": "Vedi dettagli episodio",
+        "viewEpDetails": "Ascolta episodio",
         "close": "chiudi",
         "unsubscribe": "Disiscriviti da questo podcast",
         "play": "RIPRODUCI",
@@ -33,7 +32,6 @@
         "suggestionsForYou": "Ecco qualche consiglio per te:",
         "subscribe": "Iscriviti a questo podcast",
         "subscribedMsg": "Ti sei iscritto a questo podcast!",
-        "subscribedAlready": "Sei già iscritto: visualizza episodi",
         "searchPlaceHolder": "Cerca",
         "results": "Risultati della tua ricerca:"
     }

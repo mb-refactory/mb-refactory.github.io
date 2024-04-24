@@ -6,18 +6,15 @@ document.addEventListener('DOMContentLoaded', function () {
 function initializeBtns() {
   const player = document.querySelector('audio');
   const playBtn = document.querySelector('.play-btn');
-  translate(playBtn, 'play');
   playBtn.addEventListener('click', () => {
     player.play();
   });
   const pauseBtn = document.querySelector('.pause-btn');
-  translate(pauseBtn, 'pause');
   pauseBtn.addEventListener('click', () => {
     player.pause();
     pauseBtn.classList.add('active');
   });
   const stopBtn = document.querySelector('.stop-btn');
-  translate(stopBtn, 'stop');
   stopBtn.addEventListener('click', () => {
     player.pause();
     player.currentTime = 0;
@@ -34,19 +31,27 @@ function initializeBtns() {
       player.volume -= 0.1;
     }
   });
+  const skipBwBtn = document.querySelector('.skip-fw-btn');
+  skipBwBtn.addEventListener('click', () => {
+    player.currentTime += 10;
+  });
+  const skipFwBtn = document.querySelector('.skip-bw-btn');
+  skipFwBtn.addEventListener('click', () => {
+    player.currentTime -= 10;
+  });
 }
 
 function initializeEpisodeDetails(){
-
+  const podcastTitleElement = document.querySelector('.podcast-title')
   const episodeDetails = JSON.parse(sessionStorage.getItem('selectedEpisode'));
-  const cover = document.querySelector('.img-fluid');
-  const title = document.querySelector('.episode-title');
-  const description = document.querySelector('p');
+  const episodeTitle = document.querySelector('.episode-title');
+  const description = document.querySelector('.episode-description');
   const publishDateElement = document.querySelector('.publish-date');
   const player = document.querySelector('audio');
 
-  cover.src = episodeDetails.image;
-  title.textContent = episodeDetails.title;
+  const podcastTitle = getPodcastDetailsFromSessionStorage().title;
+  podcastTitleElement.textContent = podcastTitle;
+  episodeTitle.textContent = episodeDetails.title;
   description.textContent = episodeDetails.description.replace(/<[^>]*>/g, '');
   let episodeDate = episodeDetails.datePublishedPretty.split(' ').slice(0, 3).join(' ');
   publishDateElement.textContent = formatDate(episodeDate);

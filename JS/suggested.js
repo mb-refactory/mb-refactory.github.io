@@ -1,5 +1,5 @@
 const suggestionsForYou = document.querySelector('h1');
-translate(suggestionsForYou, 'suggestionsForYou')
+translate(suggestionsForYou);
 
 const subscribedIDs = getSubscribedPodcastsIDs();
 const categories = [];
