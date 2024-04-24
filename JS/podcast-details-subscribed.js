@@ -1,55 +1,56 @@
 
 initializePodcastDetails();
 
-let podcastID = getPodcastDetailsFromSessionStorage().id;
-let subscribedPodcastsIDs = getSubscribedPodcastsIDs();
-let subscribedOn = document.querySelector(".subscription-date");
-let subscriptionDate = getSubscriptionDateById(podcastID);
-subscribedOn.textContent = subscriptionDate;
+const subscriptionDateElement = document.querySelector(".subscription-date");
+const subscribedOnElement = document.querySelector(".subscribed-on");
 const unsubscribeBtn = document.querySelector(".unsubscribe-btn");
+
+const subscribedPodcastsIDs = getSubscribedPodcastsIDs();
+const podcastID = getPodcastDetailsFromSessionStorage().id;
+const subscriptionDate = getSubscriptionDateById(podcastID);
+subscriptionDateElement.textContent = formatDate(subscriptionDate);
+translate(subscribedOnElement, 'subscribedOn');
+translate(unsubscribeBtn, 'unsubscribe')
 
 console.log('Gathering information on podcast episodes with ID: ' + podcastID);
 podcastIndexEpisodesByIdAPI(podcastID, 20)
     .then(data => {
-        console.log(data);
         showEpisodes(data);
     });
 
 function showEpisodes(data) {
     const details = document.querySelector('.details');
-    const subscribtionDate = document.querySelector('.subscription-date');
+    const subscribtionDateElement = document.querySelector('.subscription-date');
     // Ordina cronologicamente
     data.items.sort((a, b) => a.datePublished - b.datePublished);
     data.items.forEach(episode => {
 
-        console.log(episode.datePublished);
         const card = document.createElement('div');
-        card.className = 'card mb-3 mt-3 fade-in';
-
-        const row = document.createElement('div');
-        row.className = 'row';
-
-        const cardBodyCol = document.createElement('div');
-        cardBodyCol.className = 'col-md-9';
+        card.className = 'card mb-3 mt-3 fade-in bg-light';
 
         const cardBody = document.createElement('div');
-        cardBody.className = 'card-body';
+        cardBody.className = 'card-body text-center';
 
-        const episodeTitle = document.createElement('h4');
-        episodeTitle.className = 'card-title';
-        episodeTitle.textContent = episode.title;
+        const episodeTitleElement = document.createElement('h3');
+        let episodeTitle = episode.title;
+        episodeTitleElement.className = 'card-title mt-2 mx-5 text-center';
+        episodeTitleElement.textContent = episodeTitle;
+        card.appendChild(episodeTitleElement);
 
-        const episodeDescription = document.createElement('p');
-        episodeDescription.className = 'card-text';
-        episodeDescription.textContent = episode.description.replace(/<[^>]*>/g, '');
+        let viewDescriptionBtn = document.createElement('button');
+        viewDescriptionBtn.className = 'btn btn-outline-primary mb-2 btn-lg';
+        viewDescriptionBtn.setAttribute('type', 'button');
+        translate(viewDescriptionBtn, 'readDescription');
+        viewDescriptionBtn.style = 'width: 90%';
+        
+        let closeBtn = document.querySelector('.close');
+        translate(closeBtn, 'close');
 
-        cardBody.appendChild(episodeTitle);
-        cardBody.appendChild(episodeDescription);
-        cardBodyCol.appendChild(cardBody);
-        row.appendChild(cardBodyCol);
-
-        const btnCol = document.createElement('div');
-        btnCol.className = 'col-md-3 mt-2 text-end';
+        let description = episode.description.replace(/<[^>]*>/g, '');
+        viewDescriptionBtn.addEventListener('click', function () {
+            showModal(episodeTitle, description);
+        });
+        cardBody.appendChild(viewDescriptionBtn);
 
         const link = document.createElement('a');
         link.href = 'episode-details.html';
@@ -57,19 +58,16 @@ function showEpisodes(data) {
             sessionStorage.setItem('selectedEpisode', JSON.stringify(episode));
         });
 
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'btn btn-primary py-2 m-3 btn-lg';
-        btn.textContent = 'View details';
+        const viewEpisodeBtn = document.createElement('button');
+        viewEpisodeBtn.type = 'button';
+        viewEpisodeBtn.className = 'btn btn-primary py-3 mx-3 mb-2 btn-lg';
+        viewEpisodeBtn.style = 'width: 90%';
+        translate(viewEpisodeBtn, 'viewEpDetails');
+        link.appendChild(viewEpisodeBtn);
+        cardBody.appendChild(link);
 
-        link.appendChild(btn);
-        btnCol.appendChild(link);
-        row.appendChild(btnCol);
-
-        card.appendChild(row);
-        details.appendChild(card);
-
-        subscribtionDate.insertAdjacentElement('afterend', card);
+        card.appendChild(cardBody);
+        subscribtionDateElement.insertAdjacentElement('afterend', card);
 
     });
 

@@ -1,9 +1,12 @@
-// Se è la prima visita rimanda al Login
-if (!localStorage.getItem('visitedBefore')) {
-    window.location.href = 'login.html';
-    localStorage.setItem('visitedBefore', true);
-}
 
+let yourPodcastsBtn = document.querySelector('.your-podcasts-btn');
+translate(yourPodcastsBtn, 'yourPodcasts');
+
+let suggestedBtn = document.querySelector('.suggested-btn');
+translate(suggestedBtn, 'suggested');
+
+let searchBtn = document.querySelector('.search-btn');
+translate(searchBtn, 'search');
 
 function initializeSubscribedPodcasts() {
     if (!localStorage.getItem('subscribedPodcasts')) {
@@ -12,4 +15,6 @@ function initializeSubscribedPodcasts() {
 }
 
 initializeSubscribedPodcasts();
+
+
 

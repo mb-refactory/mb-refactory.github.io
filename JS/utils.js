@@ -88,6 +88,39 @@ function initializePodcastDetails() {
   });
 }
 
+function getLanguage() {
+  return navigator.language;
+  // return 'it-IT';
+}
+
+async function getTranslation(language, key) {
+  try {
+    const response = await fetch('JS/translation.json');
+    const data = await response.json();
+    return data[language][key];
+  } catch (error) {
+    console.error('Error while fetching the json file', error);
+  }
+}
+
+async function translate(target, key) {
+  try {
+    const language = getLanguage();
+    const translatedContent = await getTranslation(language, key);
+    target.textContent = translatedContent;
+  } catch (error) {
+    console.error('Error while fetching the json file', error);
+  }
+}
+
+function showModal(title, content) {
+  let modalElement = document.querySelector('.episode-description-modal');
+  modalElement.querySelector('.modal-title').innerText = title;
+  modalElement.querySelector('.modal-body').innerHTML = content;
+  let modal = new bootstrap.Modal(modalElement);
+  modal.show();
+}
+
 function getSubscribedPodcasts() {
   let subscribedPodcasts = JSON.parse(localStorage.getItem('subscribedPodcasts')) || [];
   return subscribedPodcasts;
@@ -101,8 +134,15 @@ function getSubscribedPodcastsIDs() {
 
 function getSubscriptionDateById(podcastId) {
   let subscribedPodcasts = getSubscribedPodcasts();
-  const subscribedPodcast = subscribedPodcasts.find(podcast => podcast.id === podcastId);
+  let subscribedPodcast = subscribedPodcasts.find(podcast => podcast.id === podcastId);
   return subscribedPodcast ? subscribedPodcast.subscriptionDate : null;
+}
+
+function formatDate(date){
+  let dateObject = new Date(date);
+  const options = { month: 'long', day: 'numeric', year: 'numeric' };
+  const formattedDate = dateObject.toLocaleDateString(getLanguage(), options);
+  return formattedDate
 }
 
 function getPodcastDetailsFromSessionStorage() {

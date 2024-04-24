@@ -1,3 +1,6 @@
+const suggestionsForYou = document.querySelector('h1');
+translate(suggestionsForYou, 'suggestionsForYou')
+
 const subscribedIDs = getSubscribedPodcastsIDs();
 const categories = [];
 let topCategories = [];
