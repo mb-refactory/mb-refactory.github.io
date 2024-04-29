@@ -12,10 +12,19 @@ body {
     animation-fill-mode: forwards;
 }
 
-.fade-in {
-    animation: fadeInAnimation ease 2s;
+.fade-in, .fade-in * {
+    animation: fadeInAnimation ease 1s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+}
+
+.hidden-with-fade-out {
+  opacity: 0;
+  transition: opacity 2s linear 1s;
+}
+
+.bg-change-transition {
+  transition: background-color 2s ease;
 }
 
 @keyframes fadeInAnimation {
@@ -46,15 +55,15 @@ body {
   @keyframes shadowPulse {
     33% {
       background: #FFF;
-      box-shadow: -24px 0 #ffb700, 24px 0 #FFF;
+      box-shadow: -24px 0 #624a74, 24px 0 #ffffff;
     }
     66% {
-      background: #ffb700;
+      background: #624a74;
       box-shadow: -24px 0 #FFF, 24px 0 #FFF;
     }
     100% {
       background: #FFF;
-      box-shadow: -24px 0 #FFF, 24px 0 #ffb700
+      box-shadow: -24px 0 #FFF, 24px 0 #624a74
     }
   }
 

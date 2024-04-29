@@ -14,7 +14,9 @@ let topCategories = [];
     
     topCategories = findMostFrequentValues(categories);
     console.log("Top categories: " + topCategories);
-    podcastIndexTrendingAPI(12, topCategories).then((data) => {
-      updateGrid(data.feeds, "suggested");
+    podcastIndexTrendingAPI(20, topCategories).then((data) => {
+      const allSuggestedPodcasts = data.feeds;
+      const unsubscribedSuggestedPodcasts = allSuggestedPodcasts.filter((podcast) => !subscribedIDs.includes(podcast.id));
+      updateGrid(unsubscribedSuggestedPodcasts, "suggested");
   });
 });

@@ -106,7 +106,7 @@ function toggleSubscriptionElements() {
         showSubscriptionDate();
         subscribeBtn.classList.add('d-none');
         unsubscribeBtn.classList.remove('d-none');
-        document.body.classList.replace('bg-body-secondary', 'bg-dark-subtle');
+        updateSubscribedBackground();
         document.querySelector('.bi-star-fill').classList.remove('d-none');
     }
     if (!isSubscribed(podcastID)) {
@@ -118,9 +118,12 @@ subscribeBtn.addEventListener('click', () => {
     if (!isSubscribed(podcastID)) {
         addPodcastToSubscriptionList(podcastID);
         translate(subscribeBtn, 'subscribedMsg');
+        subscribeBtn.classList.add('hidden-with-fade-out');
+        document.body.classList.add('bg-change-transition');
         setTimeout(() => {
             toggleSubscriptionElements();
         }, 2000);
+
     }
 });
 

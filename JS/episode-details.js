@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
   initializeEpisodeDetails();
   initializeBtns();
+  checkSubscription()
 });
 
 function initializeBtns() {
@@ -41,15 +42,15 @@ function initializeBtns() {
   });
 }
 
-function initializeEpisodeDetails(){
-  const podcastTitleElement = document.querySelector('.podcast-title')
+function initializeEpisodeDetails() {
+  const podcastTitleElement = document.querySelector('.podcast-title');
   const episodeDetails = JSON.parse(sessionStorage.getItem('selectedEpisode'));
   const episodeTitle = document.querySelector('.episode-title');
   const description = document.querySelector('.episode-description');
   const publishDateElement = document.querySelector('.publish-date');
   const player = document.querySelector('audio');
-
   const podcastTitle = getPodcastDetailsFromSessionStorage().title;
+
   podcastTitleElement.textContent = podcastTitle;
   episodeTitle.textContent = episodeDetails.title;
   description.textContent = episodeDetails.description.replace(/<[^>]*>/g, '');
@@ -57,5 +58,5 @@ function initializeEpisodeDetails(){
   publishDateElement.textContent = formatDate(episodeDate);
   let listenURL = episodeDetails.enclosureUrl;
   player.src = listenURL;
-  
+
 } 

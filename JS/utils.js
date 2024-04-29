@@ -185,3 +185,10 @@ function suggestToSubscribe() {
   document.querySelector(".container-grid").appendChild(suggestion);
 }
 
+function updateSubscribedBackground() {
+  document.body.classList.replace('bg-body-secondary', 'bg-subscribed');
+}
+
+
+
+
