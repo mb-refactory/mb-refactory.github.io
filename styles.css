@@ -1,0 +1,73 @@
+/*CUSTOM CSS CODE HERE */
+
+audio {
+    width: 90%;
+    border-radius: 2em;
+    background-color: grey;
+}
+
+body {
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.fade-in, .fade-in * {
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+.hidden-with-fade-out {
+  opacity: 0;
+  transition: opacity 2s linear 1s;
+}
+
+.bg-change-transition {
+  transition: background-color 2s ease;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.loader {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: block;
+    margin:150px auto;
+    margin-bottom: 100vh;
+    position: relative;
+    background: #FFF;
+    box-shadow: -24px 0 #FFF, 24px 0 #FFF;
+    box-sizing: border-box;
+    animation: shadowPulse 1s linear infinite;
+    transform: scale(2); /* Aumenta le dimensioni del loader senza modificare le proporzioni */
+  }
+
+  
+  @keyframes shadowPulse {
+    33% {
+      background: #FFF;
+      box-shadow: -24px 0 #624a74, 24px 0 #ffffff;
+    }
+    66% {
+      background: #624a74;
+      box-shadow: -24px 0 #FFF, 24px 0 #FFF;
+    }
+    100% {
+      background: #FFF;
+      box-shadow: -24px 0 #FFF, 24px 0 #624a74
+    }
+  }
+
+
+  
+
+  

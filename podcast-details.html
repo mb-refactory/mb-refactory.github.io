@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Details</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="media/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/favicon/favicon-16x16.png">
+    <link rel="manifest" href="media/favicon/site.webmanifest">
+    <!-- Boostrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Import customized Bootstrap -->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Styles other parts of the page -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-body-secondary">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container justify-content-center">
+                <a class="navbar-brand" href="index.html"><img src="media/logo.svg" alt="logo" width="150em"></a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container fade-in">
+            <div class="row my-2 mt-5 text-center">
+                <div class="col text-center d-lg-flex justify-content-lg-center">
+                    <h1 class="align-content-center display-1 fw-bolder">Podcast Title</h1>
+                    <i class="m-4 align-content-center bi bi-star-fill d-none"
+                        style="font-size: 4rem; color: rgb(79, 48, 101);"></i>
+                </div>
+            </div>
+            <div class=" row m-2">
+                        <div class="col-lg-3 p-3">
+                            <img src="" alt="Pocast cover" class="img-fluid rounded-3">
+                        </div>
+                        <div class="col-lg-9 my-1 p-3 fs-3">
+                            <p class="mb-4 px-1 fw-bold">Podcast description</p>
+                            <div class="subscription-info h2 alert alert-secondary text-center d-none">
+                                <div class="h5 fw-bold subscribed-on">Subscribed on:</div>
+                                <div class="h5 subscription-date">Subscription Date</div>
+                            </div>
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-green btn-lg subscribe-btn p-3 mb-3 fs-2 fade-out"
+                                    style="width: 90%;">
+                                    Subscribe to this podcast </button>
+                            </div>
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-danger btn-lg unsubscribe-btn p-3"
+                                    style="width: 90%;">Unsubscribe from this podcast</button>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <!-- Episode Details Modal -->
+            <div class="modal modal-xl fade episode-description-modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header text-center mx-auto">
+                            <h1 class="modal-title h1 fw-bold">Modal title</h1>
+                        </div>
+                        <div class="modal-body h3 mx-5">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-lg close"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </main>
+
+    <footer class="footer py-3 bg-dark text-center">
+        <div class="container">
+            <span class="text-white">&copy; 2024, <a class="text-white" href="index.html">PodcastApp</a></span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="js/config.js"></script>
+    <script src="js/podcast-index-API.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/podcast-details.js"></script>
+</body>
+
+</html>

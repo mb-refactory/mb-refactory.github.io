@@ -1,0 +1,40 @@
+{
+    "en-US": {
+        "yourPodcasts": "Your Podcasts",
+        "suggested": "Suggested",
+        "search": "Search",
+        "subscribedOn": "Subscribed on: ",
+        "readDescription": "Read description...",
+        "viewEpDetails": "Listen to this episode",
+        "close": "close",
+        "unsubscribe": "Unsubscribe from this podcast",
+        "unsubscribedMsg": "You successfully unsubscribed from this podcast",
+        "play": "PLAY",
+        "pause": "PAUSE",
+        "stop": "STOP",
+        "suggestionsForYou": "Here are some suggestions for you:",
+        "subscribe": "Subscribe to this podcast",
+        "subscribedMsg": "You subscribed to this podcast!",
+        "searchPlaceHolder": "Search",
+        "results": "Results of your search:"
+    },
+    "it-IT": {
+        "yourPodcasts": "I Tuoi Podcast",
+        "suggested": "Consigliati",
+        "search": "Cerca",
+        "subscribedOn": "Data di iscrizione: ",
+        "readDescription": "Leggi la descrizione...",
+        "viewEpDetails": "Ascolta episodio",
+        "close": "chiudi",
+        "unsubscribe": "Disiscriviti da questo podcast",
+        "unsubscribedMsg": "Ti sei disicritto da questo podcast",
+        "play": "RIPRODUCI",
+        "pause": "PAUSA",
+        "stop": "STOP",
+        "suggestionsForYou": "Ecco qualche consiglio per te:",
+        "subscribe": "Iscriviti a questo podcast",
+        "subscribedMsg": "Ti sei iscritto a questo podcast!",
+        "searchPlaceHolder": "Cerca",
+        "results": "Risultati della tua ricerca:"
+    }
+}
