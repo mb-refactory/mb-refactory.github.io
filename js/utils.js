@@ -91,7 +91,7 @@ function getLanguage() {
 
 async function getTranslation(language, key) {
   try {
-    const response = await fetch('js/translation.json');
+    const response = await fetch('js/translations.json');
     const data = await response.json();
     return data[language][key];
   } catch (error) {

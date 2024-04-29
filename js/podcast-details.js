@@ -130,8 +130,10 @@ subscribeBtn.addEventListener('click', () => {
 unsubscribeBtn.addEventListener('click', () => {
     if (isSubscribed(podcastID)) {
         removeSubscribedPodcast(podcastID);
-        alert('You successfully unsubscribed from this podcast');
-        window.history.go(-1);
+        translate(unsubscribeBtn, 'unsubscribedMsg');
+        setTimeout(() => {
+            window.history.go(-1);
+        }, 2000);
     }
 }
 );

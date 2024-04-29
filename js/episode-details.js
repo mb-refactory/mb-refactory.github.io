@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   initializeEpisodeDetails();
   initializeBtns();
-  checkSubscription()
 });
 
 function initializeBtns() {
@@ -9,16 +8,21 @@ function initializeBtns() {
   const playBtn = document.querySelector('.play-btn');
   playBtn.addEventListener('click', () => {
     player.play();
+    playBtn.classList.add('active');
+    pauseBtn.classList.remove('active')
   });
   const pauseBtn = document.querySelector('.pause-btn');
   pauseBtn.addEventListener('click', () => {
     player.pause();
     pauseBtn.classList.add('active');
+    playBtn.classList.remove('active');
   });
   const stopBtn = document.querySelector('.stop-btn');
   stopBtn.addEventListener('click', () => {
     player.pause();
     player.currentTime = 0;
+    playBtn.classList.remove('active')
+    pauseBtn.classList.remove('active')
   });
   const volUpBtn = document.querySelector('.volume-up-btn');
   volUpBtn.addEventListener('click', () => {

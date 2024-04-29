@@ -1,10 +1,12 @@
 /*CUSTOM CSS CODE HERE */
 
+/*
 audio {
     width: 90%;
     border-radius: 2em;
     background-color: grey;
 }
+*/
 
 body {
     animation: fadeInAnimation ease 1s;
@@ -67,7 +69,111 @@ body {
     }
   }
 
+  /* Custom Audio Player */
 
+  .audio-player {
+    --player-button-width: 3em;
+    --sound-button-width: 2em;
+    --space: .5em;
+    width: 15rem;
+    height: 15rem;
+  }
   
-
+  
+  .timeline-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    touch-action: none; 
+  }
+  
+  .timeline {
+    width: 100%;
+    height: 2em;
+    background-color: #c2b5d0;
+    border-radius: 5px;
+    background-size: 0% 100%;
+    background-image: linear-gradient(rgb(132, 89, 168), rgb(132, 89, 168));
+    background-repeat: no-repeat;
+    margin-right: var(--space);
+    touch-action: none;
+  }
+  
+  .timeline::-webkit-slider-thumb {
+    width: .5em;
+    height: 3em;
+    border: none;
+    border-radius: .2em; 
+    cursor: pointer;
+    opacity: 0;
+    transition: all .1s;
+    background-color: #3d3052;
+  }
+  
+  .timeline::-moz-range-thumb {
+    width: .5em;
+    height: 3em;
+    border: none;
+    border-radius: .2em;
+    cursor: pointer;
+    opacity: 0;
+    transition: all .1s;
+    background-color: #3d3052;
+  }
+  
+  .timeline::-ms-thumb {
+    width: .5em;
+    height: 2em;
+    border: none;
+    border-radius: .2em;
+    cursor: pointer;
+    opacity: 0;
+    transition: all .1s;
+    background-color: #3d3052;
+  }
+  
+  .timeline::-webkit-slider-thumb:hover {
+    background-color: #3d3052;
+  }
+  
+  .timeline:hover::-webkit-slider-thumb {
+    opacity: 1;
+  }
+  
+  .timeline::-moz-range-thumb:hover {
+    background-color: #3d3052;
+  }
+  
+  .timeline:hover::-moz-range-thumb {
+    opacity: 1;
+  }
+  
+  .timeline::-ms-thumb:hover {
+    background-color: #3d3052;
+  }
+  
+  .timeline:hover::-ms-thumb {
+    opacity: 1;
+  }
+  
+  .timeline::-webkit-slider-runnable-track {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+  
+  .timeline::-moz-range-track {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
+  
+  .timeline::-ms-track {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+  }
   
