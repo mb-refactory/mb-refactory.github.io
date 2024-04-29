@@ -91,6 +91,7 @@ body {
   }
   
   .timeline {
+    -webkit-appearance: none;
     width: 100%;
     height: 2em;
     background-color: #c2b5d0;
@@ -103,6 +104,7 @@ body {
   }
   
   .timeline::-webkit-slider-thumb {
+    -webkit-appearance: none;
     width: .5em;
     height: 3em;
     border: none;
@@ -114,6 +116,7 @@ body {
   }
   
   .timeline::-moz-range-thumb {
+    -webkit-appearance: none;
     width: .5em;
     height: 3em;
     border: none;
@@ -125,6 +128,7 @@ body {
   }
   
   .timeline::-ms-thumb {
+    -webkit-appearance: none;
     width: .5em;
     height: 2em;
     border: none;
