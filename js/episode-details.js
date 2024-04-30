@@ -9,7 +9,7 @@ function initializeBtns() {
   playBtn.addEventListener('click', () => {
     player.play();
     playBtn.classList.add('active');
-    pauseBtn.classList.remove('active')
+    pauseBtn.classList.remove('active');
   });
   const pauseBtn = document.querySelector('.pause-btn');
   pauseBtn.addEventListener('click', () => {
@@ -21,8 +21,9 @@ function initializeBtns() {
   stopBtn.addEventListener('click', () => {
     player.pause();
     player.currentTime = 0;
-    playBtn.classList.remove('active')
-    pauseBtn.classList.remove('active')
+    playBtn.classList.remove('active');
+    pauseBtn.classList.remove('active');
+    localStorage.removeItem('currentPlaybackTime_' + episodeDetails.id);
   });
   const volUpBtn = document.querySelector('.volume-up-btn');
   volUpBtn.addEventListener('click', () => {
@@ -54,6 +55,10 @@ function initializeEpisodeDetails() {
   const publishDateElement = document.querySelector('.publish-date');
   const player = document.querySelector('audio');
   const podcastTitle = getPodcastDetailsFromSessionStorage().title;
+  const resumeBtn = document.querySelector('.resume-btn');
+  const cancelBtn = document.querySelector('.cancel-btn');
+  translate(resumeBtn, 'resume');
+  translate(cancelBtn, 'cancel');
 
   podcastTitleElement.textContent = podcastTitle;
   episodeTitle.textContent = episodeDetails.title;
@@ -62,5 +67,27 @@ function initializeEpisodeDetails() {
   publishDateElement.textContent = formatDate(episodeDate);
   let listenURL = episodeDetails.enclosureUrl;
   player.src = listenURL;
+  player.addEventListener('timeupdate', saveCurrentTime);
+  showResumeModal(player, episodeDetails);
+}
 
-} 
+function saveCurrentTime() {
+  const player = document.querySelector('audio');
+  const episodeDetails = JSON.parse(sessionStorage.getItem('selectedEpisode'));
+  localStorage.setItem('currentPlaybackTime_' + episodeDetails.id, player.currentTime);
+}
+
+function showResumeModal(player, episodeDetails) {
+  const savedPlaybackTime = parseFloat(localStorage.getItem('currentPlaybackTime_' + episodeDetails.id));
+  const resumeBtn = document.querySelector('.resume-btn');
+  if (savedPlaybackTime) {
+    getTranslation(getLanguage(), 'resumeMsg').then((resumeMsg) => {
+      showModal(resumeMsg, '');
+    });
+    resumeBtn.addEventListener('click', function () {
+      player.currentTime = savedPlaybackTime;
+      player.play();
+    });
+    localStorage.removeItem('currentPlaybackTime_' + episodeDetails.id);
+  }
+}
