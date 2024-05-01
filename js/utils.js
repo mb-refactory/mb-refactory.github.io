@@ -50,7 +50,7 @@ function updateGrid(data) {
     title.textContent = podcastTitle;
 
     const description = document.createElement('p');
-    description.classList.add('card-text', 'fs-4');
+    description.classList.add('card-text', 'fs-4', 'fw-bold');
     let podcastDescription = podcastInfo.description.replace(/<[^>]*>/g, '');
     if (podcastDescription.length > 160) {
       podcastDescription = podcastDescription.substring(0, 160) + '...';
