@@ -1,12 +1,9 @@
 /*CUSTOM CSS CODE HERE */
 
-/*
-audio {
-    width: 90%;
-    border-radius: 2em;
-    background-color: grey;
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-*/
 
 body {
     animation: fadeInAnimation ease 1s;
@@ -181,3 +178,10 @@ body {
     background: transparent;
   }
   
+
+  /* Safari Images max-height */
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    .cover-img {
+      /* max-height: 30em; */
+    }
+  }

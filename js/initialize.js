@@ -15,24 +15,19 @@ function initializeSubscribedPodcasts() {
 }
 
 initializeSubscribedPodcasts();
-
-
 // PWA Installation
 let installBtn = document.querySelector('.install-btn');
-translate(installBtn, 'install');
 const installIcon = document.createElement('i');
 installIcon.className = 'bi bi-file-earmark-arrow-down-fill text-white px-2';
+translate(installBtn, 'install').then(() => {installBtn.appendChild(installIcon); 
+});
 
 // Detect Chrome 
 let userAgentString = navigator.userAgent;
 let chromeAgent = userAgentString.indexOf('Chrome') > -1;
 // Detect Safari 
 let safariAgent = userAgentString.indexOf('Safari') > -1;
-// Discard Safari since it also matches Chrome 
 if ((chromeAgent) && (safariAgent)) safariAgent = false;
-
-console.log('On Chrome: ' + chromeAgent);
-console.log('On Safari: ' + safariAgent);
 
 if (chromeAgent) {
     installFromChrome();
@@ -47,7 +42,6 @@ function installFromChrome() {
         event.preventDefault();
         installPrompt = event;
         installBtn.classList.remove('d-none');
-        installBtn.appendChild(installIcon);
     });
 
     installBtn.addEventListener('click', async () => {
@@ -80,7 +74,6 @@ function installFromSafari() {
 
     if (!iOSIsInstalled) {
         installBtn.classList.remove('d-none');
-        installBtn.appendChild(installIcon);
         installBtn.addEventListener('click', () => {
             showModal();
             const modalTitle = document.querySelector('.modal-title');
@@ -102,6 +95,8 @@ function installFromSafari() {
             translate(li2, 'instruction-2');
             translate(li3, 'instruction-3');
             modalBody.appendChild(ol);
+            const closeBtn = document.querySelector('.got-it');
+            translate(closeBtn, 'gotIt');
         });
     }
 }

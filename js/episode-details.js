@@ -23,7 +23,6 @@ function initializeBtns() {
     player.currentTime = 0;
     playBtn.classList.remove('active');
     pauseBtn.classList.remove('active');
-    localStorage.removeItem('currentPlaybackTime_' + episodeDetails.id);
   });
   const volUpBtn = document.querySelector('.volume-up-btn');
   volUpBtn.addEventListener('click', () => {

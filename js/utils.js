@@ -28,26 +28,25 @@ function updateGrid(data) {
     descriptionRow.classList.add('row', 'g-0', 'm-3');
 
     const imgCol = document.createElement('div');
-    imgCol.classList.add('col-4', 'bg-secondary-subtle');
+    imgCol.classList.add('col-4', 'd-flex', 'bg-secondary-subtle');
 
     const img = document.createElement('img');
     let source = podcastInfo.artwork;
-    if (source === ''){
+    if (source === '') {
       // sets the fallback cover
       source = 'media/favicon/android-chrome-512x512.png';
       img.classList.add('p-3', 'bg-light');
     }
     img.src = source;
-    img.classList.add('img-fluid', 'rounded-start', 'bg-light', 'object-fit-cover');
+    img.classList.add('img-fluid', 'rounded-start', 'bg-light', 'object-fit-cover', 'h-100');
     img.alt = 'cover';
 
-    
     const cardBodyCol = document.createElement('div');
     cardBodyCol.classList.add('col-8', '.bg-light', 'text-start');
-    
+
     const cardBody = document.createElement('div');
     cardBody.classList.add('card-body', 'rounded-end');
-    
+
     const title = document.createElement('h2');
     title.classList.add('card-title', 'display-5', 'fw-bold', 'm-1', 'text-white');
     let podcastTitle = podcastInfo.title;
@@ -55,7 +54,7 @@ function updateGrid(data) {
       podcastTitle = podcastTitle.substring(0, 50) + '...';
     }
     title.textContent = podcastTitle;
-    
+
     const description = document.createElement('p');
     description.classList.add('card-text', 'fs-4', 'fw-bold');
     let podcastDescription = podcastInfo.description.replace(/<[^>]*>/g, '');
@@ -84,7 +83,13 @@ function initializePodcastDetails() {
   document.addEventListener('DOMContentLoaded', function () {
     const podcastDetails = getPodcastDetailsFromSessionStorage();
     const cover = document.querySelector('.img-fluid');
-    cover.src = podcastDetails.artwork;
+    let coverSource = podcastDetails.artwork;
+    if (coverSource === '') {
+      // sets the fallback cover
+      coverSource = 'media/favicon/android-chrome-512x512.png';
+      cover.classList.add('p-3', 'bg-light', 'rounded-3');
+    }
+    cover.src = coverSource;
     const title = document.querySelector('h1');
     title.textContent = podcastDetails.title;
     const description = document.querySelector('p');
@@ -96,10 +101,10 @@ function initializePodcastDetails() {
 }
 
 function getLanguage() {
-  return 'it-IT';
+  // return 'it-IT';
   const systemLanguage = navigator.language;
-  if (systemLanguage === 'en-GB'){
-    return 'en-US'
+  if (systemLanguage === 'en-GB') {
+    return 'en-US';
   }
   return systemLanguage;
 }
@@ -200,7 +205,7 @@ function suggestToSubscribe() {
   suggestion.classList = ('alert alert-warning text-center fw-bold fs-4');
   suggestion.style.marginBottom = '70vh';
   suggestion.style.marginTop = '30vh';
-  suggestion.textContent = 'Subscribe to a Podcast to see it here';
+  translate(suggestion, "subscribeToSeeItHereMsg");
   document.querySelector('.container-grid').appendChild(suggestion);
 }
 
