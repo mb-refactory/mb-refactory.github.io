@@ -21,9 +21,13 @@
         "subscribedMsg": "You subscribed to this podcast!",
         "searchPlaceHolder": "Search",
         "results": "Results of your search:",
-        "install": "Install App"
-
-
+        "install": "Install App",
+        "gotIt": "Got it",
+        "instructions": "Instructions",
+        "instruction-1": "Tap the ‘Share’ button",
+        "instruction-2": "Select ‘Add to Home Screen’ ('Add to Dock' on MacOS) from the popup",
+        "instruction-3": "Tap ‘Add’ in the top right corner"
+        
     },
     "it-IT": {
         "yourPodcasts": "I Tuoi Podcast",
@@ -47,7 +51,11 @@
         "subscribedMsg": "Ti sei iscritto a questo podcast!",
         "searchPlaceHolder": "Cerca",
         "results": "Risultati della tua ricerca:",
-        "install": "Installa App"
-
+        "install": "Installa App",
+        "gotIt": "Ho capito",
+        "instructions": "Istruzioni",
+        "instruction-1": "Seleziona 'Condividi' in alto a destra",
+        "instruction-2": "Seleziona 'Aggiungi alla home' ('Aggiungi al Dock' su MacOS) ",
+        "instruction-3": "Seleziona 'Aggiungi' in alto a destra"
     }
 }

@@ -19,7 +19,7 @@ function updateGrid(data) {
     link.classList.add('text-decoration-none');
 
     const card = document.createElement('div');
-    card.classList.add('card', 'mb-3', 'rounded-3', 'bg-primary-subtle');
+    card.classList.add('card', 'mb-4', 'rounded-3', 'bg-primary-subtle');
 
     const cardRow = document.createElement('div');
     cardRow.classList.add('row', 'g-0', 'bg-primary', 'rounded');
@@ -28,27 +28,34 @@ function updateGrid(data) {
     descriptionRow.classList.add('row', 'g-0', 'm-3');
 
     const imgCol = document.createElement('div');
-    imgCol.classList.add('col-4');
+    imgCol.classList.add('col-4', 'bg-secondary-subtle');
 
     const img = document.createElement('img');
-    img.src = podcastInfo.artwork;
-    img.classList.add('img-fluid', 'rounded-start', 'h-100', 'object-fit-cover');
+    let source = podcastInfo.artwork;
+    if (source === ''){
+      // sets the fallback cover
+      source = 'media/favicon/android-chrome-512x512.png';
+      img.classList.add('p-3', 'bg-light');
+    }
+    img.src = source;
+    img.classList.add('img-fluid', 'rounded-start', 'bg-light', 'object-fit-cover');
     img.alt = 'cover';
 
+    
     const cardBodyCol = document.createElement('div');
     cardBodyCol.classList.add('col-8', '.bg-light', 'text-start');
-
+    
     const cardBody = document.createElement('div');
     cardBody.classList.add('card-body', 'rounded-end');
-
+    
     const title = document.createElement('h2');
     title.classList.add('card-title', 'display-5', 'fw-bold', 'm-1', 'text-white');
     let podcastTitle = podcastInfo.title;
-    if (podcastTitle.length > 40) {
-      podcastTitle = podcastTitle.substring(0, 40) + '...';
+    if (podcastTitle.length > 50) {
+      podcastTitle = podcastTitle.substring(0, 50) + '...';
     }
     title.textContent = podcastTitle;
-
+    
     const description = document.createElement('p');
     description.classList.add('card-text', 'fs-4', 'fw-bold');
     let podcastDescription = podcastInfo.description.replace(/<[^>]*>/g, '');
@@ -89,8 +96,12 @@ function initializePodcastDetails() {
 }
 
 function getLanguage() {
-  // return navigator.language;
   return 'it-IT';
+  const systemLanguage = navigator.language;
+  if (systemLanguage === 'en-GB'){
+    return 'en-US'
+  }
+  return systemLanguage;
 }
 
 async function getTranslation(language, key) {
