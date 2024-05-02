@@ -16,7 +16,6 @@ function initializeSubscribedPodcasts() {
 
 initializeSubscribedPodcasts();
 
-let navbar = document.querySelector('.navbar')
 // PWA Installation
 let installBtn = document.querySelector('.install-btn');
 translate(installBtn, 'install');
