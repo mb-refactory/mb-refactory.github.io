@@ -20,7 +20,9 @@
         "subscribe": "Subscribe to this podcast",
         "subscribedMsg": "You subscribed to this podcast!",
         "searchPlaceHolder": "Search",
-        "results": "Results of your search:"
+        "results": "Results of your search:",
+        "install": "Install App"
+
 
     },
     "it-IT": {
@@ -44,6 +46,8 @@
         "subscribe": "Iscriviti a questo podcast",
         "subscribedMsg": "Ti sei iscritto a questo podcast!",
         "searchPlaceHolder": "Cerca",
-        "results": "Risultati della tua ricerca:"
+        "results": "Risultati della tua ricerca:",
+        "install": "Installa App"
+
     }
 }

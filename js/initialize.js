@@ -16,5 +16,43 @@ function initializeSubscribedPodcasts() {
 
 initializeSubscribedPodcasts();
 
+let navbar = document.querySelector('.navbar')
+// PWA Installation
+let installBtn = document.querySelector('.install-btn');
+translate(installBtn, 'install');
+const installIcon = document.createElement('i');
+installIcon.className = 'bi bi-file-earmark-arrow-down-fill text-white px-2';
+navbar.appendChild(installIcon);
+
+window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    installPrompt = event;
+    installBtn.classList.remove('d-none');
+    installBtn.appendChild(installIcon)
+});
+
+installBtn.addEventListener('click', async () => {
+    if (!installPrompt) {
+        return;
+    }
+    const result = await installPrompt.prompt();
+    console.log(`Install prompt was: ${result.outcome}`);
+    disableInAppInstallPrompt();
+});
+
+function disableInAppInstallPrompt() {
+    installPrompt = null;
+    installBtn.classList.add('d-none');
+}
+
+
+window.addEventListener('appinstalled', () => {
+    disableInAppInstallPrompt();
+});
+
+function disableInAppInstallPrompt() {
+    installPrompt = null;
+    installBtn.classList.add('d-none');
+}
 
 
