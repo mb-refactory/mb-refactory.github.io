@@ -22,7 +22,6 @@ let installBtn = document.querySelector('.install-btn');
 translate(installBtn, 'install');
 const installIcon = document.createElement('i');
 installIcon.className = 'bi bi-file-earmark-arrow-down-fill text-white px-2';
-navbar.appendChild(installIcon);
 
 window.addEventListener('beforeinstallprompt', (event) => {
     event.preventDefault();
