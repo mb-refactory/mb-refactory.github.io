@@ -23,7 +23,7 @@ function showEpisodes(data) {
     data.items.forEach(episode => {
 
         const card = document.createElement('div');
-        card.className = 'card mb-3 mt-3 fade-in bg-light';
+        card.className = 'card mb-3 mt-3 fade-in bg-light shadow';
 
         const cardBody = document.createElement('div');
         cardBody.className = 'card-body text-center';
@@ -35,7 +35,7 @@ function showEpisodes(data) {
         card.appendChild(episodeTitleElement);
 
         let viewDescriptionBtn = document.createElement('button');
-        viewDescriptionBtn.className = 'btn btn-outline-primary mb-2 btn-lg';
+        viewDescriptionBtn.className = 'btn btn-outline-secondary mb-2 btn-lg';
         viewDescriptionBtn.setAttribute('type', 'button');
         translate(viewDescriptionBtn, 'readDescription');
         viewDescriptionBtn.style = 'width: 90%';

@@ -1,8 +1,15 @@
 /*CUSTOM CSS CODE HERE */
 
+/* Anti Aliasing */
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Animations */
+.btn:active {
+  transform: scale(1.05);
+  transition: transform 0.3s;
 }
 
 body {
@@ -178,10 +185,3 @@ body {
     background: transparent;
   }
   
-
-  /* Safari Images max-height */
-  @media screen and (-webkit-min-device-pixel-ratio:0) {
-    .cover-img {
-      /* max-height: 30em; */
-    }
-  }
