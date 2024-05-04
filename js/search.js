@@ -12,9 +12,26 @@ input.addEventListener("keypress", (e) => {
     }
 });
 
+// Custom message if form is invalid
+/*
+input.addEventListener('invalid', function () {
+    if (!this.validity.valid) {
+        this.setCustomValidity('Please insert a search term first');
+        if (getLanguage() === 'it-IT') {
+            this.setCustomValidity('Perfavore inserisci un termine di ricerca');
+        }
+    }
+});
+
+input.addEventListener('input', function () {
+    this.setCustomValidity('');
+});
+*/
+
 searchButton.addEventListener("click", (e) => {
-    console.log('clicked');
     let searchTerms = input.value;
     sessionStorage.setItem("searched", searchTerms);
 });
+
+
 

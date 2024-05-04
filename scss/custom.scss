@@ -1,5 +1,10 @@
 // Custom Variables
-$primary : #493365;
+$primary : hsl(266, 19%, 35%);
+$primary : #4f3f65;
+$success: #7ABA78;
+$warning: #ECB159;
+$danger: #DD5746;
+
 
 @import '../bootstrap/scss/_functions';
 @import '../bootstrap/scss/_variables';
@@ -18,8 +23,11 @@ $theme-colors: (
 $custom-theme-colors: (
   "subscribed": $purple-100,
   "yellow": $yellow-500,
-  "blue": $blue-800,
+  "blue": #153448,
   "green": $green-600,
+  "dove-grey": #B0A695,
+  "dark-grey": #6f6f6f,
+  "grey": #A9A9A9,
 );
 
 $theme-colors: map-merge($custom-theme-colors, $theme-colors);

@@ -23,7 +23,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
             <div class="container justify-content-center">
-                <a class="navbar-brand" href="index.html"><img src="media/logo.svg" alt="logo" width="150em"></a>
+                <a class="navbar-brand" href="index.html"><img src="media/logo.svg" alt="logo" width="160em"></a>
             </div>
         </nav>
     </header>
@@ -39,28 +39,30 @@
                 <div class="col my-1 p-4">
                     <div class="text-center">
                         <button type="button"
-                            class="btn btn-success btn-lg px-5 py-md-3 py-4  my-1 mx-md-1 play-btn col-12 col-md-auto shadow"><i
+                            class="btn btn-success text-white btn-lg px-5 py-md-3 py-4  my-1 mx-md-1 play-btn col-12 col-md-auto shadow"><i
                                 class="bi bi-play-fill" style="font-size: 2rem"></i></button>
                         <button type="button"
                             class="btn btn-warning btn-lg px-5 py-md-3 py-4  my-1 mx-md-1 pause-btn text-white col-12 col-md-auto shadow"><i
                                 class="bi bi-pause-fill" style="font-size: 2rem"></i></button>
                         <button type="button"
-                            class="btn btn-danger btn-lg px-5 py-md-3 py-4 my-1 mx-md-1 stop-btn color col-12 col-md-auto shadow"><i
+                            class="btn btn-danger text-white btn-lg px-5 py-md-3 py-4 my-1 mx-md-1 stop-btn color col-12 col-md-auto shadow"><i
                                 class="bi bi-stop-fill" style="font-size: 2rem"></i></button>
+                        <button type="button"
+                            class="d-none btn btn-blue text-white btn-lg px-5 py-md-3 py-4  my-1 mx-md-1 speed-btn fs-2 fw-bolder col-12 col-md-auto shadow">1x</button>
                         <div class="btn-group">
                             <button type="button"
-                                class="btn btn-blue btn-lg px-5 py-3 m-1 volume-down-btn fs-2 fw-bolder">VOL
+                                class="btn btn-blue btn-lg px-5 py-3 m-1 volume-down-btn fs-2 fw-bolder shadow">VOL
                                 -</button>
                             <button type="button"
-                                class="btn btn-blue btn-lg px-5 py-3 m-1 mx-sm-1 volume-up-btn fs-2 fw-bolder">VOL
+                                class="btn btn-blue btn-lg px-5 py-3 m-1 mx-sm-1 volume-up-btn fs-2 fw-bolder shadow">VOL
                                 +</button>
                         </div>
                         <div class="btn-group">
                             <button type="button"
-                                class="btn btn-secondary btn-lg px-5 py-3 m-1 skip-bw-btn fs-2 fw-bolder"><i
+                                class="btn btn-secondary btn-lg px-5 py-3 m-1 skip-bw-btn fs-2 fw-bolder shadow"><i
                                     class="bi bi-skip-backward-fill" style="font-size: 2rem"></i> 10s</button>
                             <button type="button"
-                                class="btn btn-secondary btn-lg px-5 py-3 m-1 skip-fw-btn fs-2 fw-bolder"><i
+                                class="btn btn-secondary btn-lg px-5 py-3 m-1 skip-fw-btn fs-2 fw-bolder shadow"><i
                                     class="bi bi-skip-forward-fill" style="font-size: 2rem"></i> 10s</button>
                         </div>
                     </div>
@@ -69,7 +71,7 @@
                             <source src="" type="audio/mpeg">
                         </audio>
                         <div class="col-12 timeline-container text-center">
-                            <input type="range" class="timeline" max="100" value="0">
+                            <input type="range" class="timeline shadow" max="100" value="0">
                         </div>
                         <div class="col-12 time-marks mt-2 d-flex justify-content-between">
                             <span class="current-time mx-1 fw-bold fs-4">00:00</span>
@@ -79,24 +81,32 @@
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col">
-                    <h1 class="episode-title h2 fw-bold text-white bg-primary p-2 mx-2 rounded-2">Episode title</h1>
-                </div>
-            </div>
-            <div class="row text-center mt-2">
-                <div class="col-md-12 col-lg-6 mx-auto">
-                    <div class="publish-date h2 alert alert-secondary text-center">April 4, 2024</div>
+                <div class="col mb-2">
+                    <h1 class="episode-title h2 fw-bold text-white bg-primary p-3 mx-2 rounded-2 shadow">Episode title
+                    </h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col text-center m-1">
-                    <p class="episode-description fs-2 mb-5 alert alert-dark ">Episode description</p>
+                <div class="col text-center mx-2">
+                    <p class="episode-description fs-2 alert alert-secondary border-0 shadow-lg">Episode description</p>
+                </div>
+            </div>
+            <div class="row justify-content-center mx-1 mt-2">
+                <div class="col-lg-6 col-sm-12">
+                    <div class="publish-date h2 alert alert-dark text-center border-0 fw-semibold shadow-sm">January
+                        1st, 1970</div>
+                </div>
+            </div>
+            <div class="row text-center mt-2 mb-5 pb-3 text-center">
+                <div class="col">
+                    <button type="button"
+                        class="btn btn-secondary btn-lg py-3 px-5 skip-fw-btn fw-bolder fs-2 download shadow-sm"><i
+                            class="bi bi-file-arrow-down-fill" style="font-size: 2rem; margin-right: 0.2em;"></i>Download</button>
                 </div>
             </div>
         </div>
         <!-- Resume Modal -->
-        <div class="modal modal-xl fade" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal modal-xl fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header mx-auto">
@@ -106,12 +116,10 @@
                         ...
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-lg cancel-btn"
-                            data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-secondary btn-lg cancel-btn" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button type="button" class="btn btn-primary btn-lg resume-btn"
-                            data-bs-dismiss="modal">
+                        <button type="button" class="btn btn-primary btn-lg resume-btn" data-bs-dismiss="modal">
                             Resume
                         </button>
                     </div>
@@ -120,7 +128,7 @@
         </div>
     </main>
 
-    <footer class="footer py-3 bg-dark fixed-bottom text-center">
+    <footer class="footer py-3 bg-dark text-center shadow">
         <div class="container">
             <span class="text-white">&copy; 2024, <a class="text-white" href="index.html">PodcastApp</a></span>
         </div>

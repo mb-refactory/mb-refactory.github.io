@@ -1,9 +1,13 @@
 
 let yourPodcastsBtn = document.querySelector('.your-podcasts-btn');
-translate(yourPodcastsBtn, 'yourPodcasts');
+translate(yourPodcastsBtn, 'yourPodcasts').then(() => {
+    AddBsIcon(yourPodcastsBtn, 'bi-archive-fill');
+});
 
 let suggestedBtn = document.querySelector('.suggested-btn');
-translate(suggestedBtn, 'suggested');
+translate(suggestedBtn, 'suggested').then(() => {
+    AddBsIcon(suggestedBtn, 'bi-lightbulb-fill');
+});
 
 let searchBtn = document.querySelector('.search-btn');
 translate(searchBtn, 'search');
@@ -19,7 +23,8 @@ initializeSubscribedPodcasts();
 let installBtn = document.querySelector('.install-btn');
 const installIcon = document.createElement('i');
 installIcon.className = 'bi bi-file-earmark-arrow-down-fill text-white px-2';
-translate(installBtn, 'install').then(() => {installBtn.appendChild(installIcon); 
+translate(installBtn, 'install').then(() => {
+    installBtn.appendChild(installIcon);
 });
 
 // Detect Chrome 

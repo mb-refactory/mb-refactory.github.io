@@ -19,7 +19,7 @@ function updateGrid(data) {
     link.classList.add('text-decoration-none');
 
     const card = document.createElement('div');
-    card.className = 'card mb-4 rounded-3 bg-primary-subtle border-0 shadow-lg';
+    card.className = 'card podcast-card mb-4 rounded-3 bg-primary-subtle border-0 shadow-lg';
 
     const cardRow = document.createElement('div');
     cardRow.className = 'row g-0 bg-primary rounded-3 shadow-sm';
@@ -35,10 +35,10 @@ function updateGrid(data) {
     if (source === '') {
       // sets the fallback cover
       source = 'media/favicon/android-chrome-512x512.png';
-      img.className = 'p-3 bg-light';
+      img.classList.add('img-fluid', 'p-3', 'bg-light', 'rounded-3');
     }
     img.src = source;
-    img.className = 'img-fluid rounded-start-3 bg-light object-fit-cover h-100';
+    img.classList.add('img-fluid', 'rounded-3', 'bg-light', 'object-fit-cover', 'h-100');
     img.alt = 'cover';
 
     const cardBodyCol = document.createElement('div');
@@ -75,12 +75,12 @@ function updateGrid(data) {
     col.appendChild(link);
     row.appendChild(col);
 
-    card.addEventListener('touchstart', function() {
+    card.addEventListener('touchstart', function () {
       this.style.transform = 'scale(1.1)';
       this.style.transition = 'transform 0.2s';
     });
 
-    card.addEventListener('touchend', function() {
+    card.addEventListener('touchend', function () {
       this.style.transform = 'scale(1)';
     });
 
@@ -97,7 +97,7 @@ function initializePodcastDetails() {
     if (coverSource === '') {
       // sets the fallback cover
       coverSource = 'media/favicon/android-chrome-512x512.png';
-      cover.className = 'p-3 bg-light rounded-3';
+      cover.classList.add('p-3', 'bg-light', 'rounded-3');
     }
     cover.src = coverSource;
     const title = document.querySelector('h1');
@@ -111,7 +111,7 @@ function initializePodcastDetails() {
 }
 
 function getLanguage() {
-  // return 'it-IT';
+  return 'it-IT';
   const systemLanguage = navigator.language;
   if (systemLanguage === 'en-GB') {
     return 'en-US';
@@ -137,6 +137,13 @@ async function translate(target, key) {
   } catch (error) {
     console.error('Error while fetching the json file', error);
   }
+}
+
+function AddBsIcon(target, iconName) {
+  const icon = document.createElement('i');
+  icon.classList.add('bi', iconName);
+  icon.style.paddingRight = '0.2em';
+  target.insertBefore(icon, target.firstChild);
 }
 
 function showModal(title, content) {
@@ -205,26 +212,87 @@ async function fetchSubscribedPodcastsByIds(subscribedIdList) {
 }
 
 function showLoadingSpinner() {
-  const loadingIndicator = document.createElement('span');
-  loadingIndicator.classList = ('loader loading');
+  const loadingIndicator = document.createElement('div');
+  loadingIndicator.classList = ('loader');
+  for (let i = 0; i < 5; i++) {
+    const div = document.createElement('div');
+    loadingIndicator.appendChild(div);
+  }
   document.querySelector('.container-grid').appendChild(loadingIndicator);
 }
 
 function suggestToSubscribe() {
+  const grid = document.querySelector('.container-grid');
   const suggestion = document.createElement('div');
-  suggestion.classList = ('alert alert-warning text-center fw-bold fs-4');
-  suggestion.style.marginBottom = '70vh';
-  suggestion.style.marginTop = '30vh';
+  suggestion.classList = ('alert alert-primary text-center fw-bold fs-4 mt-5 rounded-3 border-0 shadow');
   translate(suggestion, "subscribeToSeeItHereMsg");
-  document.querySelector('.container-grid').appendChild(suggestion);
+  grid.appendChild(suggestion);
 }
 
 function updateSubscribedBackground() {
   document.body.classList.replace('bg-body-secondary', 'bg-subscribed');
 }
 
+function searchAgain() {
+  const grid = document.querySelector('.container-grid');
+  grid.classList.add('text-center');
+  const noResultsMessage = document.createElement('p');
+  noResultsMessage.className = 'fw-bold fs-5 text-center fst-italic';
+  translate(noResultsMessage, 'noResultsMsg');
+  const searchAgainBtn = document.createElement('button');
+  const searchAgainLink = document.createElement('a');
+  searchAgainBtn.className = 'col-12 col-md-6 btn btn-lg btn-warning fw-bold p-3';
+  searchAgainLink.setAttribute('href', 'search.html');
+  translate(searchAgainBtn, 'searchAgain');
+  grid.appendChild(noResultsMessage);
+  searchAgainLink.appendChild(searchAgainBtn);
+  grid.appendChild(searchAgainLink);
+  let loader = document.querySelector('.loader');
+  loader.remove();
+}
 
 
+function startMediaSessionAPI(podcastTitle, episodeDetails, player) {
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: episodeDetails.title,
+    artist: podcastTitle,
+    artwork: [
+      { src: episodeDetails.image }
+    ]
+  });
+  navigator.mediaSession.setActionHandler('play', async () => {
+    await player.play();
+  });
+  navigator.mediaSession.setActionHandler('pause', () => {
+    player.pause();
+  });
+  navigator.mediaSession.setActionHandler('stop', () => {
+    player.currentTime = 0;
+  });
+  const defaultSkipTime = 10; /* Time to skip in seconds by default */
+  navigator.mediaSession.setActionHandler('seekbackward', (details) => {
+    const skipTime = details.seekOffset || defaultSkipTime;
+    player.currentTime = Math.max(player.currentTime - skipTime, 0);
+  });
+  navigator.mediaSession.setActionHandler('seekforward', (details) => {
+    const skipTime = details.seekOffset || defaultSkipTime;
+    player.currentTime = Math.min(player.currentTime + skipTime, player.duration);
+  });
+
+  player.addEventListener('ratechange', () => {
+    updatePositionState(player);
+  });
+}
+
+function updatePositionState(player) {
+  if ('setPositionState' in navigator.mediaSession) {
+    navigator.mediaSession.setPositionState({
+      duration: player.duration,
+      playbackRate: player.playbackRate,
+      position: player.currentTime,
+    });
+  }
+}
 
 
 

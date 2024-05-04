@@ -22,6 +22,8 @@
         "subscribeToSeeItHereMsg": "Subscribe to a podcast to see it here",
         "searchPlaceHolder": "Search",
         "results": "Results of your search:",
+        "noResultsMsg": "No results found for your search...",
+        "searchAgain": "Search Again",
         "install": "Install App",
         "gotIt": "Got it",
         "instructions": "Instructions",
@@ -31,7 +33,7 @@
         
     },
     "it-IT": {
-        "yourPodcasts": "I Tuoi Podcast",
+        "yourPodcasts": "I tuoi Podcast",
         "suggested": "Consigliati",
         "search": "Cerca",
         "subscribedOn": "Data di iscrizione: ",
@@ -53,7 +55,9 @@
         "subscribeToSeeItHereMsg": "Iscriviti ad un Podcast per vederlo qui",
         "searchPlaceHolder": "Cerca",
         "results": "Risultati della tua ricerca:",
-        "install": "Installa App",
+        "noResultsMsg": "Non è stato trovato alcun risultato, prova a cambiare termini di ricerca...",
+        "searchAgain": "Fai un'altra ricerca",
+        "install": "Installa l'App",
         "gotIt": "Ho capito",
         "instructions": "Istruzioni",
         "instruction-1": "Seleziona 'Condividi' in alto a destra",

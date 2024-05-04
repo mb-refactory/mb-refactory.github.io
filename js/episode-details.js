@@ -44,6 +44,17 @@ function initializeBtns() {
   skipFwBtn.addEventListener('click', () => {
     player.currentTime -= 10;
   });
+
+  let playbackRates = [1, 1.5, 2];
+  let currentRateIndex = 0;
+  const speedBtn = document.querySelector('.speed-btn');
+  speedBtn.addEventListener('click', function () {
+    currentRateIndex = (currentRateIndex + 1) % playbackRates.length;
+    if (player) {
+      player.playbackRate = playbackRates[currentRateIndex];
+    }
+    document.querySelector('.speed-btn').innerText = `${playbackRates[currentRateIndex]}x`;
+  });
 }
 
 function initializeEpisodeDetails() {
@@ -56,6 +67,7 @@ function initializeEpisodeDetails() {
   const podcastTitle = getPodcastDetailsFromSessionStorage().title;
   const resumeBtn = document.querySelector('.resume-btn');
   const cancelBtn = document.querySelector('.cancel-btn');
+  const downloadBtn = document.querySelector('.download');
   translate(resumeBtn, 'resume');
   translate(cancelBtn, 'cancel');
 
@@ -66,7 +78,11 @@ function initializeEpisodeDetails() {
   publishDateElement.textContent = formatDate(episodeDate);
   let listenURL = episodeDetails.enclosureUrl;
   player.src = listenURL;
+  downloadBtn.addEventListener('click', () => {
+    window.location.href = listenURL;
+  });
   player.addEventListener('timeupdate', saveCurrentTime);
+  startMediaSessionAPI(podcastTitle, episodeDetails, player);
   showResumeModal(player, episodeDetails);
 }
 
@@ -90,3 +106,5 @@ function showResumeModal(player, episodeDetails) {
     localStorage.removeItem('currentPlaybackTime_' + episodeDetails.id);
   }
 }
+
+

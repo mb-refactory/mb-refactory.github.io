@@ -1,6 +1,6 @@
-
 initializePodcastDetails();
 
+const podcastDetailsContent = document.querySelector('.podcast-details-content');
 const subscriptionDateElement = document.querySelector(".subscription-date");
 const subscribedOnElement = document.querySelector(".subscribed-on");
 const unsubscribeBtn = document.querySelector(".unsubscribe-btn");
@@ -14,6 +14,7 @@ podcastIndexEpisodesByIdAPI(podcastID, 20)
     .then(data => {
         showEpisodes(data);
         toggleSubscriptionElements();
+        podcastDetailsContent.classList.remove('d-none');
     });
 
 function showEpisodes(data) {
@@ -35,7 +36,7 @@ function showEpisodes(data) {
         card.appendChild(episodeTitleElement);
 
         let viewDescriptionBtn = document.createElement('button');
-        viewDescriptionBtn.className = 'btn btn-outline-secondary mb-2 btn-lg';
+        viewDescriptionBtn.className = 'btn btn-outline-dark-grey mb-2 btn-lg';
         viewDescriptionBtn.setAttribute('type', 'button');
         translate(viewDescriptionBtn, 'readDescription');
         viewDescriptionBtn.style = 'width: 90%';
