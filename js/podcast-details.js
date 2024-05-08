@@ -1,16 +1,22 @@
+
 initializePodcastDetails();
 
+const episodeLoaded = 5;
 const podcastDetailsContent = document.querySelector('.podcast-details-content');
 const subscriptionDateElement = document.querySelector(".subscription-date");
 const subscribedOnElement = document.querySelector(".subscribed-on");
-const unsubscribeBtn = document.querySelector(".unsubscribe-btn");
 const subscribeBtn = document.querySelector('.subscribe-btn');
+const subscribeBtnContainter = document.querySelector('.subscribe-btn-container');
+const unsubscribeBtn = document.querySelector(".unsubscribe-btn");
+const episodeSearchInput = document.querySelector('.episode-search-input');
+const loadMoreBtn = document.querySelector('.load-more-btn');
 translate(unsubscribeBtn, 'unsubscribe');
 translate(subscribeBtn, 'subscribe');
+translate(loadMoreBtn, 'loadMore');
 
 const podcastID = getPodcastDetailsFromSessionStorage().id;
 
-podcastIndexEpisodesByIdAPI(podcastID, 20)
+podcastIndexEpisodesByIdAPI(podcastID, episodeLoaded)
     .then(data => {
         showEpisodes(data);
         toggleSubscriptionElements();
@@ -18,25 +24,26 @@ podcastIndexEpisodesByIdAPI(podcastID, 20)
     });
 
 function showEpisodes(data) {
-    const details = document.querySelector('.details');
+    const episodesContainer = document.querySelector('.episodes-container');
+    episodesContainer.innerHTML = '';
     // Ordina cronologicamente
-    data.items.sort((a, b) => a.datePublished - b.datePublished);
+    data.items.sort((a, b) => b.datePublished - a.datePublished);
     data.items.forEach(episode => {
 
         const card = document.createElement('div');
-        card.className = 'card mb-3 mt-3 fade-in bg-light shadow';
+        card.className = 'card mb-3 mt-3 fade-in bg-light border-0';
 
         const cardBody = document.createElement('div');
         cardBody.className = 'card-body text-center';
 
         const episodeTitleElement = document.createElement('h3');
         let episodeTitle = episode.title;
-        episodeTitleElement.className = 'card-title mt-3 mx-5 text-center fw-bold';
+        episodeTitleElement.className = 'card-title mt-3 mx-3 text-center fw-bold';
         episodeTitleElement.textContent = episodeTitle;
         card.appendChild(episodeTitleElement);
 
         let viewDescriptionBtn = document.createElement('button');
-        viewDescriptionBtn.className = 'btn btn-outline-dark-grey mb-2 btn-lg';
+        viewDescriptionBtn.className = 'btn btn-light mb-2 btn-lg fw-semibold border-0 shadow-lg';
         viewDescriptionBtn.setAttribute('type', 'button');
         translate(viewDescriptionBtn, 'readDescription');
         viewDescriptionBtn.style = 'width: 90%';
@@ -58,15 +65,13 @@ function showEpisodes(data) {
 
         const viewEpisodeBtn = document.createElement('button');
         viewEpisodeBtn.type = 'button';
-        viewEpisodeBtn.className = 'btn btn-primary py-3 mx-3 mb-2 btn-lg fw-bold';
+        viewEpisodeBtn.className = 'btn btn-primary py-3  mb-2 btn-lg fw-bold shadow-lg';
         viewEpisodeBtn.style = 'width: 90%';
         translate(viewEpisodeBtn, 'viewEpDetails');
         link.appendChild(viewEpisodeBtn);
         cardBody.appendChild(link);
         card.appendChild(cardBody);
-        // details.appendChild(card);
-        subscribeBtn.insertAdjacentElement('afterend', card);
-
+        episodesContainer.appendChild(card);
     });
 
 }
@@ -121,10 +126,14 @@ subscribeBtn.addEventListener('click', () => {
         translate(subscribeBtn, 'subscribedMsg');
         subscribeBtn.classList.add('hidden-with-fade-out');
         document.body.classList.add('bg-change-transition');
+        subscribeBtnContainter.classList.add('soft-transition');
+        let elementHeight = subscribeBtnContainter.clientHeight;
+        subscribeBtnContainter.style.marginTop = "-" + elementHeight + "px";
         setTimeout(() => {
             toggleSubscriptionElements();
-        }, 2000);
-
+            subscribeBtnContainter.classList.remove('soft-transition');
+            subscribeBtnContainter.style.marginTop = "0px";
+        }, 3000);
     }
 });
 
@@ -139,6 +148,39 @@ unsubscribeBtn.addEventListener('click', () => {
 }
 );
 
+loadMoreBtn.addEventListener('click', () => {
+    const scrollPosition = window.scrollY;
+    let currentEpisodeCount = document.querySelectorAll('.card').length;
+    const limit = currentEpisodeCount + 5;
+    podcastIndexEpisodesByIdAPI(podcastID, limit)
+        .then(data => {
+            showEpisodes(data);
+            if (document.querySelectorAll('.card').length < limit) {
+                // No more episodes to load
+                loadMoreBtn.classList.add('d-none');
+            }
+        });
+    window.scrollTo(0, scrollPosition);
+});
+
+episodeSearchInput.addEventListener('input', () => {
+    const searchValue = episodeSearchInput.value.trim().toLowerCase();
+    const cards = document.querySelectorAll('.card');
+    let visibleCardsCount = 0;
+
+    cards.forEach(card => {
+        const title = card.querySelector('.card-title').textContent.toLowerCase();
+        if (title.includes(searchValue)) {
+            card.classList.remove('d-none');
+            visibleCardsCount++;
+        } else {
+            card.classList.add('d-none');
+        }
+    });
+    const episodesContainer = document.querySelector('.episodes-container');
+    episodesContainer.classList.toggle('mt-5', visibleCardsCount === 0);
+    loadMoreBtn.classList.toggle('d-none', searchValue != '');
+});
 
 
 

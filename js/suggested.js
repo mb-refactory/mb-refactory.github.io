@@ -1,4 +1,4 @@
-const suggestionsForYou = document.querySelector('h1');
+const suggestionsForYou = document.querySelector('.suggested-msg');
 translate(suggestionsForYou, 'suggestionsForYou');
 
 const subscribedIDs = getSubscribedPodcastsIDs();
@@ -11,7 +11,7 @@ let topCategories = [];
       const category = Object.keys(podcast.feed.categories)[0];
       categories.push(category);
     });
-    
+
     topCategories = findMostFrequentValues(categories);
     console.log("Top categories: " + topCategories);
     podcastIndexTrendingAPI(20, topCategories).then((data) => {

@@ -17,12 +17,27 @@
   /* filter: drop-shadow(5px 5px 12px rgba(0, 0, 0, 0.5)); */
 }
 
-
 /* Custom Animations */
+
+.btn,
+.podcast-card,
+.navbar-brand {
+  transition: 0.2s;
+}
+
 .btn:active,
 .podcast-card:active,
 .navbar-brand:active {
   transform: scale(1.05);
+  transition: transform 0.3s;
+}
+
+.podcast-details-cover {
+  transition: 0.3s;
+}
+
+.podcast-details-cover:active {
+  transform: scale(1.1);
   transition: transform 0.3s;
 }
 
@@ -40,8 +55,11 @@ body {
 }
 
 .hidden-with-fade-out {
-  opacity: 0;
-  transition: opacity 2s linear 1s;
+  animation: fadeOutAnimation 0.5s ease 1.5s forwards;
+}
+
+.soft-transition {
+  transition: all 0.5s 2s;
 }
 
 .bg-change-transition {
@@ -55,6 +73,28 @@ body {
 
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes fadeOutAnimation {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes shrink {
+  from {
+    visibility: visible;
+    height: auto;
+  }
+
+  to {
+    visibility: none;
+    height: 0;
   }
 }
 
@@ -80,12 +120,14 @@ body {
 
 @keyframes wave {
   25% {
-      height: calc(var(--size) * 5);
-      background-color: #898989;
+    height: calc(var(--size) * 5);
+    background-color: #898989;
   }
+
   50% {
-      height: var(--size);
-      background-color: #4f3f65;;
+    height: var(--size);
+    background-color: #4f3f65;
+    ;
   }
 }
 

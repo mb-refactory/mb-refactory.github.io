@@ -107,6 +107,10 @@ function initializePodcastDetails() {
       /<[^>]*>/g,
       ''
     );
+    let input = document.querySelector('input');
+    getTranslation(getLanguage(), 'searchEpisodePlaceHolder').then((translated) => {
+      input.placeholder = translated;
+    });
   });
 }
 
@@ -224,7 +228,7 @@ function showLoadingSpinner() {
 function suggestToSubscribe() {
   const grid = document.querySelector('.container-grid');
   const suggestion = document.createElement('div');
-  suggestion.classList = ('alert alert-primary text-center fw-bold fs-4 mt-5 rounded-3 border-0 shadow');
+  suggestion.classList = ('alert alert-primary text-center fw-bold fs-4 rounded-3 border-0');
   translate(suggestion, "subscribeToSeeItHereMsg");
   grid.appendChild(suggestion);
 }

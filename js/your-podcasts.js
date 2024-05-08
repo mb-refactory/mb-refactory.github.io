@@ -1,3 +1,5 @@
+const yourPodcastsMsg = document.querySelector('.your-podcasts');
+translate(yourPodcastsMsg, 'subscribedPodcasts');
 
 const subscribedIDs = getSubscribedPodcastsIDs();
 
