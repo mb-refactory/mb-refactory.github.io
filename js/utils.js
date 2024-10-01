@@ -75,9 +75,12 @@ function updateGrid(data) {
     col.appendChild(link);
     row.appendChild(col);
 
-    card.addEventListener('touchstart', function () {
+    card.addEventListener('click', function () {
       this.style.transform = 'scale(1.1)';
       this.style.transition = 'transform 0.2s';
+      setTimeout(() => {
+        this.style.transform = 'scale(1)';
+      }, 200); 
     });
 
     card.addEventListener('touchend', function () {
